@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<!-- CORRECCIÓN: Se eliminó user-scalable=no para evitar bloqueos de apertura y mejorar accesibilidad -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>🎂 Feliz Cumpleaños Kiara</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -26,7 +27,7 @@ body{background:var(--bg);font-family:'Quicksand',sans-serif;color:var(--white);
 .ticker{
   display:flex;gap:3rem;white-space:nowrap;
   animation:ticker-scroll 32s linear infinite;
-  font-size:clamp(.7rem,2vw,.82rem);color:var(--gold);font-weight:700;
+  font-size:clamp(.75rem, 2vw, .85rem);color:var(--gold);font-weight:700;
 }
 .ticker span{padding:0 .5rem}
 
@@ -52,18 +53,26 @@ body{background:var(--bg);font-family:'Quicksand',sans-serif;color:var(--white);
 /* ── HERO ── */
 #s-hero{gap:1.2rem;padding-top:3.5rem;text-align:center}
 .hero-emoji{font-size:clamp(1.4rem,5.5vw,2.8rem);letter-spacing:.35rem;animation:float 3s ease-in-out infinite}
+
+/* CORRECCIÓN: Ajuste de color por defecto en caso de fallo de gradiente y tamaños mínimos seguros */
 .hero-title{
   font-family:'Dancing Script',cursive;
-  font-size:clamp(2.4rem,8.5vw,5.5rem);
+  font-size:clamp(2.2rem, 8vw, 5.5rem);
+  color: var(--pink); /* Color de respaldo si falla el clip-text */
   background:linear-gradient(135deg,var(--pink),var(--gold),var(--violet));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 18px rgba(255,110,180,.65));line-height:1.1;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 0 18px rgba(255,110,180,.65));line-height:1.2;
 }
 .hero-name{
   font-family:'Dancing Script',cursive;
-  font-size:clamp(4rem,14vw,9rem);
+  font-size:clamp(3.5rem, 12vw, 9rem);
+  color: var(--gold); /* Color de respaldo si falla el clip-text */
   background:linear-gradient(135deg,var(--gold),#ffe566,var(--gold));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
   filter:drop-shadow(0 0 28px rgba(255,215,0,.95));
   animation:pulse-glow 2.5s ease-in-out infinite;display:block;line-height:1;
 }
@@ -85,7 +94,7 @@ body{background:var(--bg);font-family:'Quicksand',sans-serif;color:var(--white);
   background:linear-gradient(145deg,rgba(255,110,180,.12),rgba(198,108,255,.15),rgba(255,110,180,.1));
   border:1.5px solid rgba(255,110,180,.3);border-radius:2rem;
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  padding:clamp(1.4rem,4vw,2.4rem);max-width:640px;width:100%;
+  padding:clamp(1.2rem, 4vw, 2.4rem);max-width:640px;width:100%;
   box-shadow:0 0 40px rgba(255,110,180,.2),0 0 80px rgba(198,108,255,.1),inset 0 1px 0 rgba(255,255,255,.1);
 }
 .cake-wrap{display:flex;justify-content:center;margin:.5rem 0 1.4rem}
@@ -105,9 +114,11 @@ body{background:var(--bg);font-family:'Quicksand',sans-serif;color:var(--white);
 .age-lbl{font-size:.58rem;color:var(--peach);letter-spacing:.08em}
 .age-date{color:rgba(255,255,255,.45);font-size:.82rem;margin-top:.25rem}
 .messages{display:flex;flex-direction:column;gap:.85rem}
+
+/* CORRECCIÓN: Cambiado clamp() extremo por un tamaño mínimo legible en teléfonos pequeños */
 .msg{
   background:rgba(255,255,255,.05);border-left:3px solid var(--pink);border-radius:.7rem;
-  padding:.75rem 1rem;font-size:clamp(.83rem,2.2vw,.98rem);line-height:1.65;
+  padding:.75rem 1rem;font-size:clamp(0.9rem, 2.5vw, 1.05rem);line-height:1.65;
   color:rgba(255,255,255,.88);opacity:0;transform:translateX(-18px);
   transition:opacity .5s ease,transform .5s ease;
 }
@@ -115,14 +126,14 @@ body{background:var(--bg);font-family:'Quicksand',sans-serif;color:var(--white);
 .msg.gold{border-left-color:var(--gold);background:rgba(255,215,0,.07)}
 .msg.center-msg{
   text-align:center;font-family:'Dancing Script',cursive;
-  font-size:clamp(1.05rem,3.2vw,1.35rem);border-left:none;
+  font-size:clamp(1.15rem, 3.5vw, 1.45rem);border-left:none;
   border:1px solid rgba(255,215,0,.3);background:rgba(255,215,0,.06);
 }
 .msg strong{color:var(--gold)}
 .btn-fw{
   display:block;margin:1.4rem auto 0;padding:.7rem 1.9rem;border:none;border-radius:2rem;
   background:linear-gradient(135deg,var(--pink),var(--violet));color:var(--white);
-  font-family:'Quicksand',sans-serif;font-size:clamp(.82rem,2.2vw,.98rem);font-weight:700;
+  font-family:'Quicksand',sans-serif;font-size:clamp(.85rem,2.2vw,.98rem);font-weight:700;
   cursor:pointer;box-shadow:0 4px 20px rgba(255,110,180,.5);transition:transform .2s,box-shadow .2s;
 }
 .btn-fw:hover{transform:scale(1.05);box-shadow:0 6px 28px rgba(255,110,180,.8)}
@@ -133,6 +144,7 @@ body{background:var(--bg);font-family:'Quicksand',sans-serif;color:var(--white);
 .game-hdr{text-align:center}
 .game-hdr h2{
   font-family:'Dancing Script',cursive;font-size:clamp(1.9rem,6.5vw,3.2rem);
+  color: var(--gold);
   background:linear-gradient(135deg,var(--gold),var(--pink));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
@@ -195,6 +207,7 @@ body{background:var(--bg);font-family:'Quicksand',sans-serif;color:var(--white);
 .bday-icon{font-size:clamp(3.5rem,12vw,7rem);animation:float 2s ease-in-out infinite}
 .bday-hoy{
   font-family:'Dancing Script',cursive;font-size:clamp(2.2rem,8vw,4.5rem);
+  color: var(--gold);
   background:linear-gradient(135deg,var(--gold),var(--pink),var(--violet));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   animation:pulse-glow 2s ease-in-out infinite;
@@ -369,8 +382,6 @@ footer span{color:var(--pink)}
       <button class="btn-game" id="btn-start">🎮 ¡Jugar Ahora!</button>
     </div>
 
-    <!-- CANDLES PHASE (no overlay needed, instructions drawn on canvas) -->
-
     <!-- GAME OVER -->
     <div class="g-overlay off" id="ov-gameover">
       <div class="ov-title" id="go-title">¡Tiempo!</div>
@@ -419,14 +430,9 @@ footer span{color:var(--pink)}
 <footer>Hecho con mucho <span>♥</span> para alguien muy especial &nbsp;·&nbsp; <span>¡Feliz Cumpleaños Kiara!</span></footer>
 
 <script>
-/* ═══════════════════════════════════════════
-   CONSTANTS
-═══════════════════════════════════════════ */
-const BDAY_MONTH = 5; // June (0-indexed)
+const BDAY_MONTH = 5; 
 const BDAY_DAY   = 6;
-
 const PALETTE = ['#ff6eb4','#c66cff','#ffd700','#5ef0d8','#ff3fa0','#ffe066','#ffffff','#ffb3d9','#a8f0ff'];
-
 const WISHES = [
   '✨ Felicidad','💖 Amor','🌟 Éxito','🌸 Salud',
   '🦋 Libertad','🎵 Alegría','💫 Sueños','🌈 Esperanza',
@@ -435,9 +441,7 @@ const WISHES = [
   '💪 Fortaleza','🎭 Confianza','🌊 Calma','🔥 Pasión',
 ];
 
-/* ═══════════════════════════════════════════
-   BACKGROUND CANVAS
-═══════════════════════════════════════════ */
+/* ── BACKGROUND CANVAS ── */
 const bgC = document.getElementById('bg-canvas');
 const bgX = bgC.getContext('2d');
 let BW, BH, bgStars = [], bgParts = [], bgShoots = [];
@@ -478,7 +482,6 @@ function bgLoop() {
     bgX.beginPath(); bgX.arc(s.x,s.y,s.r,0,Math.PI*2); bgX.fill(); bgX.restore();
   });
 
-  // Shooting stars
   if (Math.random() < .004) bgShoots.push({ x: Math.random()*BW, y: Math.random()*BH*.4, vx:7+Math.random()*4, vy:2+Math.random()*2, len:90+Math.random()*70, a:1 });
   for (let i = bgShoots.length-1; i >= 0; i--) {
     const ss = bgShoots[i];
@@ -492,7 +495,6 @@ function bgLoop() {
     if (ss.a<=0) bgShoots.splice(i,1);
   }
 
-  // Confetti
   for (let i = bgParts.length-1; i >= 0; i--) {
     const p = bgParts[i];
     p.x+=p.vx; p.vy+=p.grav; p.y+=p.vy; p.vx*=.99; p.rot+=p.rotS; p.life-=p.dec;
@@ -524,32 +526,29 @@ document.getElementById('btn-fw').onclick  = launchFireworks;
 document.getElementById('btn-fw2').onclick = launchFireworks;
 setTimeout(launchFireworks, 1100);
 
-/* ─── Candle flicker ─── */
+/* ── Candle flicker ── */
 const flames = document.querySelectorAll('.fl');
 (function flick() {
   flames.forEach(f => { const sx=(.88+Math.random()*.24).toFixed(2),sy=(.78+Math.random()*.38).toFixed(2); f.style.transform=`scale(${sx},${sy})`; });
   setTimeout(flick, 65+Math.random()*90);
 })();
 
-/* ─── Scroll reveal ─── */
+/* ── Scroll reveal ── */
 const revObs = new IntersectionObserver(es => es.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*100); },{threshold:.15}));
 document.querySelectorAll('.msg').forEach(m => revObs.observe(m));
 
-/* ─── Nav dots ─── */
+/* ── Nav dots ── */
 const dots = document.querySelectorAll('.dot');
 dots.forEach(d => d.addEventListener('click', () => document.getElementById(d.dataset.sec)?.scrollIntoView({behavior:'smooth'})));
 const secObs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting&&e.intersectionRatio>.4) dots.forEach(d=>d.classList.toggle('active',d.dataset.sec===e.target.id)); },{threshold:.4}));
 ['s-hero','s-card','s-game','s-count'].forEach(id => { const el=document.getElementById(id); if(el) secObs.observe(el); });
 
-/* ═══════════════════════════════════════════
-   MINI-GAME ENGINE
-═══════════════════════════════════════════ */
+/* ── MINI-GAME ENGINE ── */
 const gc = document.getElementById('game-canvas');
 const gx = gc.getContext('2d');
 
 const G = {
-  phase: 'idle',   // idle | candles | playing | gameover
-  score: 0, combo: 0, comboTimer: 0, timeLeft: 45,
+  phase: 'idle', score: 0, combo: 0, comboTimer: 0, timeLeft: 45,
   hi: parseInt(localStorage.getItem('kiara_hi_v3')||'0'),
   stars: [], parts: [], floats: [], wishes: [],
   candles: [], candleDone: false,
@@ -557,7 +556,6 @@ const G = {
   timerIv: null, comboIv: null,
 };
 
-// ── Resize game canvas ──
 function gcResize() {
   const cw = document.getElementById('game-wrap').clientWidth;
   const ch = Math.min(490, Math.max(330, Math.floor(cw * .82)));
@@ -566,7 +564,6 @@ function gcResize() {
 window.addEventListener('resize', () => { gcResize(); if(G.phase==='candles') initCandles(); });
 gcResize();
 
-// ── CANDLES ──
 function initCandles() {
   G.candles = [0,1,2].map(i => ({
     x: gc.width * (i+1)/4,
@@ -578,15 +575,13 @@ function initCandles() {
 }
 
 function drawCandlePhase() {
-  // Bg
   const bg = gx.createLinearGradient(0,0,0,gc.height);
   bg.addColorStop(0,'#0a001e'); bg.addColorStop(1,'#190035');
   gx.fillStyle=bg; gx.fillRect(0,0,gc.width,gc.height);
 
-  // Instruction
   const remaining = G.candles.filter(c=>c.lit).length;
   gx.save();
-  gx.font = `700 ${Math.floor(gc.width*.04)}px Quicksand`;
+  gx.font = `700 ${Math.floor(gc.width*.045)}px Quicksand`;
   gx.textAlign = 'center'; gx.textBaseline = 'middle';
   gx.fillStyle = '#fff'; gx.globalAlpha = .9;
   gx.fillText(remaining>0 ? `¡Toca la${remaining>1?'s':''} vela${remaining>1?'s':''}! (${remaining} restante${remaining>1?'s':''})` : '¡Deseo pedido! ✨', gc.width/2, gc.height*.15);
@@ -597,7 +592,6 @@ function drawCandlePhase() {
 
   G.candles.forEach((c, i) => {
     const cx = c.x, cy = c.y;
-    // Body
     gx.fillStyle = c.color;
     gx.beginPath();
     gx.moveTo(cx - bW/2, cy);
@@ -607,11 +601,9 @@ function drawCandlePhase() {
     gx.closePath();
     gx.fill();
 
-    // Wax sheen
     gx.fillStyle = 'rgba(255,255,255,.18)';
     gx.beginPath(); gx.ellipse(cx - bW*.15, cy - bH*.6, bW*.22, bH*.28, -.3, 0, Math.PI*2); gx.fill();
 
-    // Wick
     gx.strokeStyle = '#444'; gx.lineWidth = 2;
     gx.beginPath(); gx.moveTo(cx, cy-bH); gx.lineTo(cx, cy-bH-8); gx.stroke();
 
@@ -620,23 +612,19 @@ function drawCandlePhase() {
       const flk = Math.sin(performance.now()/75+i*2)*.12;
 
       if (a > 0) {
-        // Glow halo
         gx.save(); gx.globalAlpha = a*.35;
         const hg = gx.createRadialGradient(cx,cy-bH-20,0,cx,cy-bH-20,32);
         hg.addColorStop(0,'#fff8a0'); hg.addColorStop(1,'transparent');
         gx.fillStyle=hg; gx.beginPath(); gx.arc(cx,cy-bH-20,32,0,Math.PI*2); gx.fill(); gx.restore();
 
-        // Outer flame
         gx.save(); gx.globalAlpha=a;
         gx.fillStyle='rgba(255,155,30,.75)';
         gx.beginPath(); gx.ellipse(cx,cy-bH-(18+flk*5),7+flk*3,17+flk*4,0,0,Math.PI*2); gx.fill();
-        // Inner flame
         gx.fillStyle='#fff9a0';
         gx.beginPath(); gx.ellipse(cx,cy-bH-(15+flk*3),3.5,11,0,0,Math.PI*2); gx.fill();
         gx.restore();
       }
 
-      // Smoke
       if (c.blowT>.35) {
         gx.save(); gx.globalAlpha=Math.min(.45,c.blowT-.35);
         for (let s=0;s<3;s++) {
@@ -649,7 +637,6 @@ function drawCandlePhase() {
       }
     }
 
-    // Check mark when done
     if (!c.lit && c.blowT>=1.2) {
       gx.save(); gx.font=`${Math.floor(gc.width*.06)}px sans-serif`;
       gx.textAlign='center'; gx.textBaseline='middle';
@@ -657,11 +644,9 @@ function drawCandlePhase() {
       gx.fillText('✓',cx,cy-bH-22); gx.restore();
     }
 
-    // Advance animation
     if (c.blowT>0) { c.blowT+=.035; if(c.blowT>=1) c.lit=false; }
   });
 
-  // All out → start playing
   if (!G.candleDone && G.candles.every(c=>!c.lit && c.blowT>=1.4)) {
     G.candleDone = true;
     setTimeout(startPlaying, 900);
@@ -674,14 +659,12 @@ function hitCandle(mx, my) {
     if (!c.lit || c.blowT>0) return;
     if (Math.abs(mx-c.x)<bW*2.5 && my>(c.y-bH-40) && my<c.y) {
       c.blowT = .01;
-      // mini burst on bg canvas
       const rect = gc.getBoundingClientRect();
       for(let k=0;k<18;k++) spawnPart(rect.left+c.x, rect.top+c.y-bH*0.5, false);
     }
   });
 }
 
-// ── PLAYING ──
 function spawnStar() {
   const wish = WISHES[0|Math.random()*WISHES.length];
   const r    = Math.random()*16+13;
@@ -696,12 +679,10 @@ function spawnStar() {
 
 function drawStar5(cx,cy,ro,ri,color,alpha,pulse) {
   gx.save(); gx.globalAlpha=alpha;
-  // Glow
   const glowR = ro*2.8+Math.sin(pulse)*2;
   const gg = gx.createRadialGradient(cx,cy,0,cx,cy,glowR);
   gg.addColorStop(0,color+'99'); gg.addColorStop(1,'transparent');
   gx.fillStyle=gg; gx.beginPath(); gx.arc(cx,cy,glowR,0,Math.PI*2); gx.fill();
-  // Star path
   gx.fillStyle=color; gx.beginPath();
   for (let i=0;i<10;i++) {
     const ang = (i*Math.PI/5)-Math.PI/2;
@@ -759,7 +740,7 @@ function endGame() {
   if (G.score>G.hi) { G.hi=G.score; localStorage.setItem('kiara_hi_v3',G.hi); }
   const caught=Math.floor(G.score/10);
   const msg=MSGS.find(([a,b])=>caught>=a&&caught<=b)?.[2]||'';
-  document.getElementById('go-title').textContent = caught>=35?'¡INCREÍBLE!':caught>=20?'¡Muy bien!':'¡Tiempo!';
+  document.getElementById('go-title').textContent = caught>=20?'¡Muy bien!':'¡Tiempo!';
   document.getElementById('go-score').textContent = G.score;
   document.getElementById('go-hi').textContent    = G.hi;
   document.getElementById('go-msg').textContent   = msg;
@@ -775,12 +756,10 @@ function playLoop(ts) {
 
   if (G.phase==='candles') { drawCandlePhase(); G.frameId=requestAnimationFrame(playLoop); return; }
 
-  // BG
   const bg2=gx.createLinearGradient(0,0,0,gc.height);
   bg2.addColorStop(0,'#0a001e'); bg2.addColorStop(1,'#190035');
   gx.fillStyle=bg2; gx.fillRect(0,0,gc.width,gc.height);
 
-  // Spawn
   G.spawnIn-=dt*1000;
   if (G.spawnIn<=0) {
     const diff=1-(G.timeLeft/45);
@@ -789,7 +768,6 @@ function playLoop(ts) {
     if(diff>.5&&Math.random()<.45) spawnStar();
   }
 
-  // Stars
   for (let i=G.stars.length-1;i>=0;i--) {
     const s=G.stars[i];
     s.x+=s.vx; s.y+=s.vy; s.pulse+=.07;
@@ -798,7 +776,6 @@ function playLoop(ts) {
     drawStar5(s.x,s.y,s.r,s.r*.42,s.color,s.alpha,s.pulse);
   }
 
-  // Particles
   for (let i=G.parts.length-1;i>=0;i--) {
     const p=G.parts[i]; p.x+=p.vx; p.y+=p.vy; p.life-=p.dec;
     if(p.life<=0){G.parts.splice(i,1);continue;}
@@ -806,23 +783,20 @@ function playLoop(ts) {
     gx.beginPath(); gx.arc(p.x,p.y,p.sz,0,Math.PI*2); gx.fill(); gx.restore();
   }
 
-  // Float texts
   for (let i=G.floats.length-1;i>=0;i--) {
     const f=G.floats[i]; f.y+=f.vy; f.life-=f.dec;
     if(f.life<=0){G.floats.splice(i,1);continue;}
     gx.save(); gx.globalAlpha=f.life; gx.fillStyle=f.color;
-    gx.font=`700 ${Math.floor(gc.width*.036)}px Quicksand`;
+    gx.font=`700 ${Math.floor(gc.width*.038)}px Quicksand`;
     gx.textAlign='center'; gx.textBaseline='middle';
     gx.fillText(f.text,f.x,f.y); gx.restore();
   }
 
-  // Low-time pulse
   if (G.timeLeft<=10) {
     gx.save(); gx.globalAlpha=.06+.05*Math.sin(ts/80); gx.fillStyle='#ff3fa0';
     gx.fillRect(0,0,gc.width,gc.height); gx.restore();
   }
 
-  // 13-star milestone celebration
   if (!G._13done && G.wishes.length>=13) {
     G._13done=true;
     floatText(gc.width/2,gc.height/2,'🌟 ¡13 Deseos! 🌟','#ffd700');
@@ -843,7 +817,7 @@ function handleInput(cx, cy) {
   for (let i=G.stars.length-1;i>=0;i--) {
     const s=G.stars[i];
     if (s.caught) continue;
-    if (Math.hypot(mx-s.x,my-s.y)<s.r*1.5) {
+    if (Math.hypot(mx-s.x,my-s.y)<s.r*1.8) { /* CORRECCIÓN: Radio de colisión ampliado levemente para pantallas táctiles */
       s.caught=true;
       G.combo++; G.comboTimer=0;
       const m=mult(), pts=10*m;
@@ -870,9 +844,7 @@ function beginGame() {
 document.getElementById('btn-start').onclick  = beginGame;
 document.getElementById('btn-retry').onclick  = beginGame;
 
-/* ═══════════════════════════════════════════
-   COUNTDOWN / BIRTHDAY
-═══════════════════════════════════════════ */
+/* ── COUNTDOWN / BIRTHDAY ── */
 function initCountdown() {
   const now = new Date();
   const isToday = now.getMonth()===BDAY_MONTH && now.getDate()===BDAY_DAY;
@@ -914,7 +886,6 @@ function tickCD() {
   document.getElementById('cd-d').textContent=d;
   setFlip('cd-h',h); setFlip('cd-m',m); setFlip('cd-s',s);
 
-  // Year progress
   let last=new Date(now.getFullYear(),BDAY_MONTH,BDAY_DAY,0,0,0);
   if (now<last) last=new Date(now.getFullYear()-1,BDAY_MONTH,BDAY_DAY,0,0,0);
   const pct=Math.min(100,Math.floor(((now-last)/(next-last))*100));
