@@ -917,12 +917,19 @@ function spawnStar() {
 }
 
 function drawStar5(cx, cy, ro, ri, color, alpha) {
-  gx.save(); gx.globalAlpha = alpha;
-  var gr = ro*2.5;
-  var gg = gx.createRadialGradient(cx,cy,0,cx,cy,gr);
-  gg.addColorStop(0, color+'99'); gg.addColorStop(1,'transparent');
-  gx.fillStyle = gg; gx.beginPath(); gx.arc(cx,cy,gr,0,Math.PI*2); gx.fill();
-  gx.fillStyle = color; gx.beginPath();
+  if (ro <= 0) return; // guard against degenerate size (avoids createRadialGradient error)
+  var gr = ro * 2.5;
+  // Glow halo — use globalAlpha instead of color+'99' to support all CSS color formats
+  gx.save();
+  gx.globalAlpha = alpha * 0.32;
+  gx.fillStyle = color;
+  gx.beginPath(); gx.arc(cx, cy, gr, 0, Math.PI*2); gx.fill();
+  gx.restore();
+  // Star shape
+  gx.save();
+  gx.globalAlpha = alpha;
+  gx.fillStyle = color;
+  gx.beginPath();
   for (var si=0; si<10; si++) {
     var ang = (si*Math.PI/5)-Math.PI/2, rr = si%2===0 ? ro : ri;
     var px = cx+Math.cos(ang)*rr, py = cy+Math.sin(ang)*rr;
@@ -956,11 +963,11 @@ function drawStars(t) {
       gx.restore();
     }
     // Anillo mega
-    if (s.type==='mega') {
-      gx.save(); gx.globalAlpha = s.alpha*(.2+.12*Math.sin(t*4+s.pulse));
-      var mg = gx.createRadialGradient(s.x,s.y,pr*.7,s.x,s.y,pr*2.4);
-      mg.addColorStop(0,color+'55'); mg.addColorStop(1,'transparent');
-      gx.fillStyle = mg; gx.beginPath(); gx.arc(s.x,s.y,pr*2.4,0,Math.PI*2); gx.fill();
+    if (s.type==='mega' && pr > 0) {
+      gx.save();
+      gx.globalAlpha = s.alpha*(.22+.12*Math.sin(t*4+s.pulse));
+      gx.fillStyle = color;
+      gx.beginPath(); gx.arc(s.x,s.y,pr*2.4,0,Math.PI*2); gx.fill();
       gx.restore();
     }
     drawStar5(s.x, s.y, pr, pr*.42, color, s.alpha);
@@ -988,12 +995,30 @@ function floatTxt(x, y, text, color) {
 }
 
 /* ─── INICIAR PARTIDA ─── */
+function spawnStarAt(yFrac) {
+  // Spawn a star at a given vertical fraction of the canvas (0=top, 1=bottom)
+  var type = pickType(), cfg = STAR_CFG[type];
+  var r  = cfg.rMin + Math.random()*(cfg.rMax-cfg.rMin);
+  var x  = r + Math.random()*(gc.width - r*2);
+  var vy = -(cfg.spMin + Math.random()*(cfg.spMax-cfg.spMin));
+  G.stars.push({
+    x:x, y: gc.height * yFrac, vx:(Math.random()-.5)*1.05, vy:vy,
+    r:r, type:type, pts:cfg.pts, cph:Math.random()*Math.PI*2,
+    wish: WISHES[0|Math.random()*WISHES.length],
+    alpha:1, caught:false, pulse:Math.random()*Math.PI*2, trail:[]
+  });
+}
+
 function startPlaying() {
   G.phase='playing'; G.score=0; G.combo=0; G.cTimer=0; G.timeLeft=45;
   G.stars=[]; G.parts=[]; G.floats=[]; G.wishes=[]; G.spawnIn=0; G.done13=false;
   G.lastTs = performance.now();
   document.getElementById('ghud').style.display = 'flex';
+  document.getElementById('hud-tm').textContent = '45'; // reset display immediately
   updateHUD();
+  // Pre-populate with a few visible stars so the game area is never empty at start
+  [.18, .38, .55, .72, .88].forEach(function(f) { spawnStarAt(f); });
+  G.spawnIn = 1200; // first new spawn after 1.2s
   G.timerIv = setInterval(function() {
     G.timeLeft--;
     document.getElementById('hud-tm').textContent = G.timeLeft;
